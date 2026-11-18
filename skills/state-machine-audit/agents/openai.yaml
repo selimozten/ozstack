@@ -1,0 +1,3 @@
+interface:
+  display_name: "State Machine Audit"
+  short_description: "Document state machines, fix reachable invalid states"

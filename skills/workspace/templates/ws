@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Workspace repo helper. Usage: ws <sync|status|visibility>
+#   sync        clone missing repos from repos.tsv; fast-forward clean default branches
+#   status      branch, dirty files, ahead/behind for every repo
+#   visibility  compare the host's visibility with repos.tsv; exits 1 on drift
+# repos.tsv: a "# org: <owner>" line, then tab-separated rows: name, visibility, stack, role.
+set -euo pipefail
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+list="$root/repos.tsv"
+org="$(sed -n 's/^# org: *//p' "$list" | head -1)"
+rows() { grep -v -e '^#' -e '^$' "$list" | cut -f1,2 || true; }
+slug() { case "$1" in */*) echo "$1" ;; *) echo "$org/$1" ;; esac; }
+
+case "${1:-status}" in
+  sync)
+    while IFS=$'\t' read -r name _; do
+      dir="$root/repos/${name##*/}"
+      if [ ! -d "$dir/.git" ]; then
+        gh repo clone "$(slug "$name")" "$dir" -- --quiet && echo "cloned  $name"
+        continue
+      fi
+      git -C "$dir" fetch --quiet --prune
+      branch="$(git -C "$dir" branch --show-current)"
+      default="$(git -C "$dir" symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null | sed 's#^origin/##')"
+      if [ "$branch" = "$default" ] && [ -z "$(git -C "$dir" status --porcelain)" ]; then
+        git -C "$dir" merge --ff-only --quiet "origin/$default" && echo "synced  $name"
+      else
+        echo "fetched $name (on $branch or dirty; left as is)"
+      fi
+    done < <(rows)
+    ;;
+  status)
+    printf '%-24s %-9s %-28s %-6s %s\n' REPO VIS BRANCH DIRTY AHEAD/BEHIND
+    while IFS=$'\t' read -r name vis; do
+      dir="$root/repos/${name##*/}"
+      if [ ! -d "$dir/.git" ]; then
+        printf '%-24s %-9s %s\n' "$name" "$vis" 'missing (run: bin/ws sync)'
+        continue
+      fi
+      branch="$(git -C "$dir" branch --show-current)"
+      dirty="$(git -C "$dir" status --porcelain | wc -l | tr -d ' ')"
+      ab="$(git -C "$dir" rev-list --left-right --count 'HEAD...@{upstream}' 2>/dev/null | tr '\t' '/' || echo -)"
+      printf '%-24s %-9s %-28s %-6s %s\n' "$name" "$vis" "$branch" "$dirty" "$ab"
+    done < <(rows)
+    ;;
+  visibility)
+    drift=0
+    while IFS=$'\t' read -r name want; do
+      got="$(gh repo view "$(slug "$name")" --json visibility -q .visibility 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)"
+      if [ "$got" != "$want" ]; then
+        echo "DRIFT   $name: repos.tsv says $want, host says ${got:-unreachable}"
+        drift=1
+      fi
+    done < <(rows)
+    [ "$drift" -eq 0 ] && echo "visibility matches repos.tsv"
+    exit "$drift"
+    ;;
+  *)
+    sed -n '2,5p' "${BASH_SOURCE[0]}" >&2
+    exit 2
+    ;;
+esac

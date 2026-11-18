@@ -1,0 +1,3 @@
+# org: {owner}
+# name (owner defaults to the org above, or owner/repo)	visibility	stack	role
+# Add a row once a repo exists, then run bin/ws sync

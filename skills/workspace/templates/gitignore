@@ -1,0 +1,9 @@
+# product repos are independent git repos; bin/ws sync restores them
+/repos/
+/_worktrees/
+.scratch/
+node_modules/
+.DS_Store
+.env
+.env.*
+.claude/settings.local.json
