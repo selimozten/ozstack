@@ -26,7 +26,7 @@ Stop at the first rung that holds:
 4. An installed dependency covers it.
 5. A direct local change: the fewest clear lines in the fewest files.
 
-An abstraction needs two concrete call sites today. Prefer deleting to adding and boring to clever. Match the surrounding style, naming and comment voice. Complete means the tests, the docs the repo keeps and the generated files are all current.
+Size is measured after the cause is fixed: a larger change that removes the cause beats a small patch that leaves it, because the next agent copies whatever it finds. An abstraction needs two concrete call sites today. Prefer deleting to adding and boring to clever. Match the surrounding style, naming and comment voice. Complete means the tests, the docs the repo keeps and the generated files are all current.
 
 ## 4. Give state one shape and one owner
 
@@ -39,19 +39,31 @@ An abstraction needs two concrete call sites today. Prefer deleting to adding an
 ## 5. Prove it
 
 - The test comes first and is seen red, at a public interface, with an expected value from an independent source (a literal, a worked example, the spec).
-- Run the real thing. "It compiles" and "the test file exists" are proxies.
+- Run the real thing, the way its user would: drive the interface, call the API, run the command. "It compiles" and "the test file exists" are proxies.
+- Evidence fits the product and is tied to a revision: for an interface, a before and after capture of the interaction; for a number, the same measurement on both revisions.
 - For a flake, raise the reproduction rate on unchanged code first, then show the fixed test green many times.
 - A failure you believe is older than your change is shown red on the unchanged base before you call it that.
 - Report the commands you ran with their counts, including skips.
 
-## 6. Stay inside the task
+## 6. Make the right path the easy path
+
+When the same mistake could be made again, remove the chance where it is cheapest to enforce, in this order:
+
+1. **The code**: a type, an invariant or a boundary that makes the mistake impossible to write.
+2. **A check**: a lint rule, a test or a CI step that fails on it.
+3. **Prose**: a line in the repo's instructions, kept short.
+4. **Review**: a person or agent catching it each time.
+
+A finding that a reviewer raises twice moves up this list.
+
+## 7. Stay inside the task
 
 Touch only what the task needs. Regenerate generated files with the repo's tool. A defect you find outside the task goes in your report, with file and line, for its own issue.
 
-## 7. Guardrails
+## 8. Guardrails
 
 Synthetic data only; secrets stay in the environment. Hooks stay on (`--no-verify` is never the answer), history that is pushed stays as it is, and other agents' worktrees and processes are theirs. Heavy commands run where the brief says.
 
-## 8. Report
+## 9. Report
 
 Lead with the outcome, then the evidence, then what is open. Long reports go in a file; send its path. Say "blocked" as soon as you are, with what you tried.

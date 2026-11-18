@@ -1,6 +1,7 @@
 ---
 name: state-machine-audit
-description: Finds a codebase's explicit and implicit state machines, documents their states, invariants and transition tables in one file, proves which invalid states are reachable, then issues and fixes them at the root. Use for a state machine audit, a hunt for invalid states or transitions, or a workaround burn-down.
+description: Documents a codebase's state machines, proves which invalid states are reachable, and fixes them at the root.
+disable-model-invocation: true
 ---
 
 # State machine audit
@@ -43,7 +44,7 @@ Done when every machine lists every lens with a finding ID or `holds: <mechanism
 
 ### 4. Confirm
 
-Build a **red** loop for each suspected finding: a test or script that drives the real code into the invalid state and asserts it. One command, deterministic, seconds long. For races, raise the reproduction rate until the loop is debuggable. Grade each finding:
+Build a **red** loop for each suspected finding: a test or script that drives the real code into the invalid state and asserts it. One command, deterministic, seconds long. For races, raise the reproduction rate until the loop is debuggable; where that fails, or the machine is high-stakes, check a model of it per [MODEL-CHECKING.md](MODEL-CHECKING.md). Grade each finding:
 
 - `confirmed`: the command and its red output are in the document.
 - `refuted`: the mechanism that prevents it, `file:line`.
@@ -53,7 +54,7 @@ Only `confirmed` is a bug. Done when every finding carries one grade and its evi
 
 ### 5. Issue
 
-Rank confirmed findings with the rubric in [DOCUMENT.md](DOCUMENT.md#priority). Group by root cause: findings one change fixes are one issue. Each issue names the machine, the invalid state or transition, the red command, the impact, the fix shape from stage 6, and the workarounds it deletes, with acceptance criteria a fresh agent can check. A high-impact `suspected` finding gets an issue to build its repro. Publish to the repo's tracker with its labels, highest priority first, and write each issue link into the ledger.
+Rank confirmed findings with the rubric in `~/.ozstack/standards/audits.md`, which also holds the rules every audit shares for issues and fixes. Group by root cause: findings one change fixes are one issue. Each issue names the machine, the invalid state or transition, the red command, the impact, the fix shape from stage 6, and the workarounds it deletes, with acceptance criteria a fresh agent can check. A high-impact `suspected` finding gets an issue to build its repro. Publish to the repo's tracker with its labels, highest priority first, and write each issue link into the ledger.
 
 Done when every confirmed finding has an issue link.
 

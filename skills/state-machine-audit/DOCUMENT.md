@@ -65,10 +65,4 @@ Finding grade: `suspected`, `confirmed`, `refuted`. Finding status: `open`, `fix
 
 ## Priority
 
-Priority is impact first, then reach.
-
-| | reached in normal use | reached by retry or concurrency under normal load | needs a fault (crash, outage, reorg) |
-|---|---|---|---|
-| money, ledger, irreversible external effect, data loss, security | P0 | P0 | P1 |
-| entity stuck or corrupted, needs manual repair | P1 | P1 | P2 |
-| wrong display, self-heals | P2 | P3 | P3 |
+The rubric is in `~/.ozstack/standards/audits.md`.

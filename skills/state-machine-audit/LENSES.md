@@ -35,4 +35,4 @@ Each lens is a question to put to every machine. The answer is a finding or the 
 13. **Clock**: an expiry or deadline races the action it limits; clocks differ between machines.
 14. **Authority**: a transition fired by an actor who may not fire it, or from a state where that actor may not act.
 
-For lenses 1 and 3, ask what happens when the operation runs twice and when the last run died at each step. For lens 2, first ask whether the actors need to share the state at all. Section 4 of `ref/engineering.md` in this kit has the rules.
+For lenses 1 and 3, ask what happens when the operation runs twice and when the last run died at each step. For lens 2, first ask whether the actors need to share the state at all. Section 4 of `~/.ozstack/standards/engineering.md` has the rules.

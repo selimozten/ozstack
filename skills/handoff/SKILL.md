@@ -16,7 +16,8 @@ Sections, in this order:
 4. **Owed**: work promised and not done (docs, comments, cleanups).
 5. **Waiting on the user**: each question with your recommendation.
 6. **Timers**: monitors, scheduled jobs and background terminals to re-arm or to check are gone.
-7. **Lessons**: only what is not yet in the profile or the kit; then move it there.
+7. **Decisions**: what was decided and which approaches were tried and rejected, one line each with the reason, so they are not tried again.
+8. **Lessons**: only what is not yet in the profile or the kit; then move it there.
 
 Point to PRs, issues and run folders instead of repeating them. Leave out secrets and personal data. Start children that must survive the restart with the flag `hc --skill` names for outliving their parent.
 

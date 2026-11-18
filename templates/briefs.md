@@ -1,6 +1,6 @@
 # Briefs
 
-Templates for the first message a child receives. Fill every `{slot}`; delete a line that does not apply. Paths are absolute. `{registry}` is this repo's root.
+Templates for the first message a child receives. Fill every `{slot}`; delete a line that does not apply. Paths are absolute. Name `~/.ozstack/standards/architecture.md` as well when the task changes structure.
 
 ## Author
 
@@ -9,13 +9,15 @@ You are an unattended author on one task in {repo}. Your checkout is {worktree},
 
 Task: {issue or task, with the command that shows it, e.g. gh issue view N -R owner/repo --comments}
 
-Read first, in full: {registry}/ref/engineering.md, the repo's AGENTS.md, and {the files, docs and precedents this task rests on}.
+Read first, in full: ~/.ozstack/standards/engineering.md, the repo's AGENTS.md, and {the files, docs and precedents this task rests on}.
 
-Focus: {the invariants at stake; what done means for this task; when to stop and report instead of continuing}
+Acceptance: {three to five observable results that mean done; the reviewer gets the same list}
+
+Focus: {the invariants at stake; the cheapest wrong fix to avoid; when to stop and report instead of continuing}
 
 Checks: {where and how heavy commands run, from the profile; the exact gate command and the line that proves it passed}
 
-Deliver: {commit form}; {push and draft PR, or commit only}; PR body with Summary, Evidence (commands and their output lines), and what is left open.
+Deliver: {commit form}; {push and draft PR, or commit only}; PR body with Summary, Evidence (commands and their output lines; for an interface, a before and after capture on this revision), and what is left open.
 
 Limits: {scope fence: only these paths}; no subagents; {the profile's guardrails}.
 
@@ -31,9 +33,11 @@ You are a fresh, independent reviewer of {PR or branch} in {repo}. You have none
 
 Read-only: on the repo, on GitHub, and on this machine's CPU ({what counts as heavy, from the profile}). No subagents. Read committed state at {worktree}; first run git rev-parse HEAD (expected {sha}) and report it.
 
-Context: {issue}, {PR with comments}, the repo's AGENTS.md, {registry}/ref/engineering.md.
+Context: {issue}, {PR with comments}, the repo's AGENTS.md, ~/.ozstack/standards/engineering.md.
 
 What this change is: {two or three sentences in your own words}
+
+Acceptance, as given to the author: {the same list}. Check each against the running product or its output, not against the PR text.
 
 The question for every line: {the one way this change can be wrong that matters most}
 

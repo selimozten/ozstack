@@ -32,7 +32,7 @@ Done when every issue in the wave has a live child whose first message was deliv
 
 When a child reports, read the diff yourself, then check each claim in the report against the source: the premise check, the root cause, the red-then-green evidence, the gate line on the PR's current head.
 
-Send back anything below `ref/engineering.md`. A premise the child disproved closes the run: comment on the issue with its evidence.
+Send back anything below `~/.ozstack/standards/engineering.md`. A premise the child disproved closes the run: comment on the issue with its evidence.
 
 Done when the PR's head is one you have verified.
 

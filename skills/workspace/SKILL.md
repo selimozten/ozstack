@@ -16,7 +16,7 @@ A **workspace** is the control plane for one organisation or product: a small gi
 | `repos.tsv` | yes | the repo list and each repo's visibility: the single source of truth |
 | `bin/ws` | yes | `sync`, `status`, `visibility` over `repos.tsv` |
 | `docs/adr/`, `docs/plans/` | yes | decisions and plans; `GLOSSARY.md` beside them for the domain language |
-| `.agents/orchestrator.md` | per choice | the orchestrator profile (the `orchestrate` skill gives its format); untracked when it names personal accounts or hosts |
+| `.agents/orchestrator.md` | per choice | the orchestrator profile (format: `~/.ozstack/templates/profile.md`); untracked when it names personal accounts or hosts |
 | `repos/<repo>` | no | product repos, each its own git repo |
 | `_worktrees/<repo>-<topic>` | no | one worktree per run |
 | `.scratch/` | no | session state: `<session>/handoff.md`, `<session>/runs/<key>/` |
@@ -28,10 +28,12 @@ Pick the branch that matches the request: **new**, **adopt** or **check**.
 ## New
 
 1. Ask for what the templates need: workspace name, the organisation that owns the repos, the repos with visibility and role, the issue tracker, and whether the workspace repo is shared with a team.
-2. Copy [templates/](templates/) into the new directory: `gitignore` becomes `.gitignore`, `ws` goes to `bin/ws` and is made executable. Fill every `{slot}`; delete a section that has nothing true to say yet.
+2. Copy `~/.ozstack/templates/workspace/` into the new directory: `gitignore` becomes `.gitignore`, `ws` goes to `bin/ws` and is made executable. Fill every `{slot}`; delete a section that has nothing true to say yet.
 3. `git init`, then `bin/ws sync`.
 4. Write the orchestrator profile with the user: roster, where heavy commands run, the gate, limits, one-way doors.
 5. Read each product repo's own `AGENTS.md` and README, and put in the workspace `AGENTS.md` only what spans repos. A repo's own file wins inside that repo.
+6. Check that each product repo tells an agent how to run the product and drive it as a user would. Where it does not, that is the first issue to file: agents cannot prove their work without it.
+7. Put each guardrail where a tool enforces it (permissions, hooks, branch protection, a sandbox). Prose is for what no tool can hold.
 
 Done when `bin/ws status` lists every repo as present, and a fresh agent could answer from `AGENTS.md` and the profile alone: which repos exist and what each is for, where heavy commands run, how a change gets from issue to merged, and what must never enter the workspace.
 
