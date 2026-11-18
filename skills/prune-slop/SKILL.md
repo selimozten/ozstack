@@ -19,7 +19,7 @@ Done when the scope is one list of files.
 Read every comment, every doc paragraph and every test in scope, and give each one verdict:
 
 - **keep**: it passes the standard's test.
-- **delete**: it is session context, repeats what is beside it, or cannot fail.
+- **delete**: it is session context, repeats what is beside it or what another file already states, or cannot fail. Where two files state the same thing, keep it in the one that owns it and point there from the other.
 - **rewrite**: it holds one fact worth keeping inside noise. Write the fact in one line.
 - **move**: it is true and useful but in the wrong home (a commit message, an issue, a decision record). Say where it goes.
 
