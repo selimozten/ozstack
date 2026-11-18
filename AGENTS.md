@@ -25,5 +25,5 @@ Rules for agents changing this repo.
 - A skill defines its leading words, names its one output, and gives stages that each end on "Done when". It states the behaviour wanted; prohibitions are for hard guardrails.
 - A file refers to another part of the kit as `~/.ozstack/<path>`, and to its own folder's files by relative link.
 - One meaning lives in one place. What audits share is in `standards/audits.md`.
-- Every skill and standard is listed in `README.md` with its status: `draft` until it has carried one real piece of work, then `proven`.
+- Every skill and standard is listed in `README.md`. The README says what the kit is and how to start; notes about its current state go in commits.
 - Examples are synthetic. Words to refuse can be listed one per line in an untracked `.private-words` file, which `check.sh` reads.

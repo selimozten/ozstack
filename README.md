@@ -1,59 +1,47 @@
 # ozstack
 
-A skill kit for building software with coding agents: how the work is run, how quality is found, and the standards it is held to. It is general by rule: no project, language or person is named.
+A skill kit for building software with coding agents: how the work is run, how quality is found, and the standards it is held to.
 
-## The pattern
+One long-running **orchestrator** session plans, briefs, verifies and decides. Authors and reviewers are **child** agents it starts for one piece of work each. Skills are invoked by name and standards are read by path, so nothing sits in an agent's context by default.
 
-One long-running **orchestrator** session plans, briefs, verifies and decides. Authors and reviewers are **child** agents it starts for one **run** each. Small tasks can still go to a single agent with a brief and the standards.
+## Get started
 
-Nothing here sits in an agent's context by default. Skills are invoked by name; standards are read by path because a brief names them.
+Give your agent this prompt from the directory you want to work in:
+
+```
+Clone https://github.com/selimozten/ozstack (or pull it if it is already cloned) and run ./install.sh.
+Then follow ~/.ozstack/skills/workspace/SKILL.md for this directory: "new" if it is empty,
+"adopt" if it already holds my repos. Ask me only what you cannot find out yourself.
+```
+
+After that, start an orchestrator session in the workspace with `/orchestrate`.
 
 ## Skills
 
-| skill | what it does | status |
-|---|---|---|
-| `workspace` | sets up, adopts or checks the control-plane directory an orchestrator works from | draft |
-| `orchestrate` | the rules of the orchestrator seat; read at the start of a session | draft |
-| `issue-loop` | turns a batch of issues into reviewed draft PRs | draft |
-| `pr-loop` | takes open PRs through review to merged | draft |
-| `handoff` | ends a session so a fresh one can continue | draft |
-| `arch-audit` | maps contexts and dependencies, finds leaks and ceremony, fixes the proven candidates | draft |
-| `state-machine-audit` | documents state machines, proves reachable invalid states, fixes them at the root | draft |
+| skill | what it does |
+|---|---|
+| `workspace` | sets up, adopts or checks the directory an orchestrator works from |
+| `orchestrate` | the rules of the orchestrator seat |
+| `issue-loop` | turns a batch of issues into reviewed draft PRs |
+| `pr-loop` | takes open PRs through review to merged |
+| `handoff` | ends a session so a fresh one can continue |
+| `arch-audit` | maps contexts and dependencies, finds leaks and ceremony, fixes the proven candidates |
+| `state-machine-audit` | documents state machines, proves reachable invalid states, fixes them at the root |
 
 ## Standards
 
-| file | what it holds | status |
-|---|---|---|
-| `standards/engineering.md` | how code is written: root causes, the smallest complete change, proof | draft |
-| `standards/architecture.md` | contexts, ports and adapters, deep modules | draft |
-| `standards/audits.md` | what every audit shares: grades, ledger, priority, issues, fixes, the ratchet | draft |
-
-## Templates
-
-`templates/briefs.md` (author, reviewer, send-back), `templates/profile.md` (the workspace profile), `templates/workspace/` (the workspace scaffold).
-
-## What belongs where
-
-| it is true… | it lives in |
+| file | what it holds |
 |---|---|
-| in every project | this kit |
-| in one workspace (repos, roster, launch lines, hosts, gate, limits) | that workspace's `.agents/orchestrator.md` |
-| in one repo or one language (how it is built, its checks, its idioms) | that repo's own instructions and skills |
+| `standards/engineering.md` | how code is written: root causes, the smallest complete change, proof |
+| `standards/architecture.md` | contexts, ports and adapters, deep modules |
+| `standards/audits.md` | what every audit shares: grades, ledger, priority, issues, fixes |
+
+Templates for briefs, the workspace profile and the workspace scaffold are in `templates/`.
 
 ## Install
 
-```sh
-git clone https://github.com/selimozten/ozstack && cd ozstack && ./install.sh
-```
-
-This links the kit to `~/.ozstack` and each skill into `~/.claude/skills`. A name that already exists and is not this kit's link is skipped and reported. `git pull` updates everything.
-
-The orchestrator skills (`orchestrate`, `issue-loop`, `pr-loop`, `handoff`) drive child agents with `hc` (herdr-core). The audits, the standards and `workspace` need no particular tool.
-
-## Contributing
-
-`AGENTS.md` has the bar and the rules. `./check.sh` must pass.
+`./install.sh` links the kit to `~/.ozstack` and each skill into `~/.claude/skills`; `git pull` updates it. The orchestrator skills drive child agents with `hc` (herdr-core); everything else needs no particular tool.
 
 ## Credits
 
-MIT licensed. Ideas are adapted from Matt Pocock's skills (`mattpocock/skills`) and from pstack by Lauren Tan, both MIT; the deep-module vocabulary follows John Ousterhout and Michael Feathers. The wording here is our own.
+MIT licensed. Ideas are adapted from Matt Pocock's skills and from pstack by Lauren Tan, both MIT; the deep-module vocabulary follows John Ousterhout and Michael Feathers.
