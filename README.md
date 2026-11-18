@@ -27,7 +27,7 @@ After that, start an orchestrator session in the workspace with `/orchestrate`.
 | `handoff` | ends a session so a fresh one can continue |
 | `arch-audit` | maps contexts and dependencies, finds leaks and ceremony, fixes the proven candidates |
 | `state-machine-audit` | documents state machines, proves reachable invalid states, fixes them at the root |
-| `prune` | removes comments, docs and tests that carry no signal |
+| `prune-slop` | removes comments, docs and tests that carry no signal |
 
 ## Standards
 
@@ -46,4 +46,4 @@ Templates for briefs, the workspace profile and the workspace scaffold are in `t
 
 ## Credits
 
-MIT licensed. Ideas are adapted from Matt Pocock's skills and from pstack by Lauren Tan, both MIT; the deep-module vocabulary follows John Ousterhout and Michael Feathers.
+MIT licensed. Ideas are adapted from Matt Pocock's skills, pstack by Lauren Tan and the `ponytail` skill, all MIT; the deep-module vocabulary follows John Ousterhout and Michael Feathers.

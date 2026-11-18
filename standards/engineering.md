@@ -1,6 +1,6 @@
 # Engineering guidelines
 
-How code is written in my projects. Every author and reviewer brief names this file. The repo's own `AGENTS.md` wins where it says more.
+How code is written. A repo's own instructions win where they say more.
 
 ## 1. Understand before you change
 
@@ -15,8 +15,6 @@ A **workaround** tolerates a state instead of preventing it: a sleep, a retry, a
 A guard is a fix only when the state is legitimate and the code simply failed to handle it.
 
 ## 3. The smallest complete change
-
-(The ladder is adapted from the MIT-licensed `ponytail` skill.)
 
 Stop at the first rung that holds:
 

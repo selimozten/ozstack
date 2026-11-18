@@ -54,20 +54,20 @@ Only `confirmed` is a bug. Done when every finding carries one grade and its evi
 
 ### 5. Issue
 
-Rank confirmed findings with the rubric in `~/.ozstack/standards/audits.md`, which also holds the rules every audit shares for issues and fixes. Group by root cause: findings one change fixes are one issue. Each issue names the machine, the invalid state or transition, the red command, the impact, the fix shape from stage 6, and the workarounds it deletes, with acceptance criteria a fresh agent can check. A high-impact `suspected` finding gets an issue to build its repro. Publish to the repo's tracker with its labels, highest priority first, and write each issue link into the ledger.
+Rank, group and publish per `~/.ozstack/standards/audits.md`. Each issue also names the machine, the invalid state or transition, and the fix shape from stage 6.
 
 Done when every confirmed finding has an issue link.
 
 ### 6. Fix
 
-One issue per branch and PR. Commit the red test first, then fix where the invalid state is produced. Take the highest rung that fits:
+Fix per the audits standard, where the invalid state is produced. Take the highest rung that fits:
 
 1. **Unrepresentable**: one state field, a discriminated union or a database constraint replaces the flag combination.
 2. **One owner**: a single transition function that every write site calls, rejecting illegal moves and comparing the current state before it swaps.
 3. **Idempotent**: a retried or replayed transition converges to the same end state.
 4. **Guard**: only where the state is legitimate and the code simply failed to handle it.
 
-Delete the workarounds the fix makes dead. Count the records already in the invalid state and repair them in the same PR. Keep the platform working: each PR passes the repo's full checks on its own and changes only the behaviour its issue names. Update the document in the same PR: the table rows, and the finding's status with the PR link.
+Delete the workarounds the fix makes dead.
 
 Done when the test is green, the repo's checks pass, the document matches the code, and the listed workarounds are gone.
 

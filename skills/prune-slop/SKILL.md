@@ -1,10 +1,10 @@
 ---
-name: prune
+name: prune-slop
 description: Removes comments, docs and tests that carry no signal from a diff, a path or a repo.
 disable-model-invocation: true
 ---
 
-# Prune
+# Prune slop
 
 Applies `~/.ozstack/standards/signal.md` to text that already exists. Read it first. **Signal** changes what a later reader does; **noise** is the rest. Pruning deletes noise and rewrites what is half of each. It changes no behaviour.
 

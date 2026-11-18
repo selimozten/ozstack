@@ -59,10 +59,4 @@ Fix shape: one owner (compare-and-swap on status), then unrepresentable (drop th
 
 One section per machine, one subsection per finding. IDs are stable: a number is never reused.
 
-## Statuses
-
-Finding grade: `suspected`, `confirmed`, `refuted`. Finding status: `open`, `fixed in <PR>`, `refuted`. Workaround status: `open`, `deleted in <PR>`.
-
-## Priority
-
-The rubric is in `~/.ozstack/standards/audits.md`.
+Grades, finding statuses and priority are in `~/.ozstack/standards/audits.md`. Workaround status: `open`, `deleted in <PR>`.
