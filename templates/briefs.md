@@ -9,7 +9,7 @@ You are an unattended author on one task in {repo}. Your checkout is {worktree},
 
 Task: {issue or task, with the command that shows it, e.g. gh issue view N -R owner/repo --comments}
 
-Read first, in full: ~/.ozstack/standards/engineering.md, the repo's AGENTS.md, and {the files, docs and precedents this task rests on}.
+Read first, in full: ~/.ozstack/standards/engineering.md, ~/.ozstack/standards/signal.md, the repo's AGENTS.md, and {the files, docs and precedents this task rests on}.
 
 Acceptance: {three to five observable results that mean done; the reviewer gets the same list}
 
@@ -44,7 +44,7 @@ The question for every line: {the one way this change can be wrong that matters 
 Try to break each of these, with file:line:
 1. {specific risk}
 2. {specific risk}
-3. Leftovers: debug code, skipped or loosened tests, suppressions, workarounds as engineering.md defines them.
+3. Leftovers: debug code, skipped or loosened tests, suppressions, workarounds as engineering.md defines them; comments, docs and tests that are noise as ~/.ozstack/standards/signal.md defines it.
 4. Anything in the diff outside the stated scope: is it needed, is it safe?
 
 Write {run folder}/review-{n}.md: head SHA; findings by severity, each with file:line, the failing scenario and the expected fix; "none found" stated per numbered item that holds; last line VERDICT: approve | changes | reject.

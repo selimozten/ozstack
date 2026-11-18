@@ -27,6 +27,7 @@ After that, start an orchestrator session in the workspace with `/orchestrate`.
 | `handoff` | ends a session so a fresh one can continue |
 | `arch-audit` | maps contexts and dependencies, finds leaks and ceremony, fixes the proven candidates |
 | `state-machine-audit` | documents state machines, proves reachable invalid states, fixes them at the root |
+| `prune` | removes comments, docs and tests that carry no signal |
 
 ## Standards
 
@@ -35,6 +36,7 @@ After that, start an orchestrator session in the workspace with `/orchestrate`.
 | `standards/engineering.md` | how code is written: root causes, the smallest complete change, proof |
 | `standards/architecture.md` | contexts, ports and adapters, deep modules |
 | `standards/audits.md` | what every audit shares: grades, ledger, priority, issues, fixes |
+| `standards/signal.md` | what earns a place in a repo: comments, docs and tests a later reader needs |
 
 Templates for briefs, the workspace profile and the workspace scaffold are in `templates/`.
 
